@@ -11,35 +11,26 @@ def get_total_power_generated():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Initialize and train the Random Forest Regression model
     model = RandomForestRegressor(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
 
-    # Make predictions on the testing set
     y_pred = model.predict(X_test)
 
-    # Evaluate the model
     mse = mean_squared_error(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
-    print('Mean Squared Error:', mse)
-    print('Mean Absolute Error:', mae)
+    accuracy = model.score(X_test, y_test)
 
-    # Prediction for the first 3 months of 2024
-    # Load the validation data
     validation_data = pd.read_csv('csv/final/wind_power_gen_3months_validation_data.csv')
 
-    # Extract features for prediction
     X_pred = validation_data[['air_temperature', 'pressure', 'wind_speed']]
 
-    # Make predictions
     predictions = model.predict(X_pred)
 
-    # Print the predictions
-    print('Predictions for the first 3 months of 2024:')
-    print(predictions)
-
     total_power_generated = sum(predictions)
-    print("Total power generated for the first 3 months of 2024:", total_power_generated)
+
+    print("Mean Squared Error:", mse)
+    print("Mean Absolute Error:", mae)
+    print("\nTotal power generated:", total_power_generated)
 
 
 def use_grid_search():
