@@ -1,4 +1,4 @@
-grid_stability_5years.csv
-price_per_unit.csv
-unit_consumption.csv
+/csv
 /.ipynb_checkpoints
+feature_engineering.ipynb
+/__pycache__
